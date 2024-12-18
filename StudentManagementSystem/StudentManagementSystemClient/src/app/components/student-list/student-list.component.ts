@@ -27,4 +27,16 @@ export class StudentListComponent implements OnInit {
       }
     );
   }
+
+  viewStudent(id:number) {
+
+  }
+
+  editStudent(id: number) {
+
+  }
+
+  deleteStudent(id: number) {
+
+  }
 }

@@ -1,6 +1,6 @@
 <h1 id="tableLabel">Student List</h1>
 
-<p *ngIf="!students"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
+<p *ngIf="!students"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular" target="_blank">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
 
 <table *ngIf="students">
   <thead>
@@ -8,6 +8,7 @@
       <th>Id</th>
       <th>Name</th>
       <th>Age</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,11 @@
       <td>{{ student.id }}</td>
       <td>{{ student.name }}</td>
       <td>{{ student.age }}</td>
+      <td>
+        <button (click)="viewStudent(student.id)">View</button>
+        <button (click)="editStudent(student.id)">Edit</button>
+        <button (click)="deleteStudent(student.id)">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>
