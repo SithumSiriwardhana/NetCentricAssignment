@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using StudentManagementSystemAPI.Data;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
+var dbConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<StudentManagementSystemAPIContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("StudentManagementSystemAPIContext") ?? throw new InvalidOperationException("Connection string 'StudentManagementSystemAPIContext' not found.")));
+    options.UseMySQL(dbConnection ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
 
 // Add CORS
 builder.Services.AddCors(options =>
@@ -42,4 +45,20 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+ApplyMigration();
+
 app.Run();
+
+
+void ApplyMigration()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var _db = scope.ServiceProvider.GetRequiredService<StudentManagementSystemAPIContext>();
+
+        if (_db.Database.GetPendingMigrations().Count() > 0)
+        {
+            _db.Database.Migrate();
+        }
+    }
+}

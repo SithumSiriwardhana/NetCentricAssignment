@@ -1,0 +1,24 @@
+
+services:
+  studentmanagementsystemapi:
+    image: ${DOCKER_REGISTRY-}studentmanagementsystemapi
+    build:
+      context: .
+      dockerfile: StudentManagementSystemAPI/Dockerfile
+
+  mysqldb:
+    image: mysql:latest
+    container_name: mysqldb
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: studentdb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppassword
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
