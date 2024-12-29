@@ -10,7 +10,7 @@ using StudentManagementSystemAPI.Data;
 namespace StudentManagementSystemAPI.Migrations
 {
     [DbContext(typeof(StudentManagementSystemAPIContext))]
-    [Migration("20241228163442_InitialMigration")]
+    [Migration("20241229164441_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -27,7 +27,7 @@ namespace StudentManagementSystemAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Addresss")
+                    b.Property<string>("Address")
                         .HasColumnType("longtext");
 
                     b.Property<int>("Age")

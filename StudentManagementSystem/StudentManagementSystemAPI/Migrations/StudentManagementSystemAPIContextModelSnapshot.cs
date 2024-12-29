@@ -24,7 +24,7 @@ namespace StudentManagementSystemAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Addresss")
+                    b.Property<string>("Address")
                         .HasColumnType("longtext");
 
                     b.Property<int>("Age")

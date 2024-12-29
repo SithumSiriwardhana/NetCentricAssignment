@@ -18,7 +18,7 @@ export class StudentListComponent implements OnInit {
   }
 
   getStudents() {
-    this.http.get<Student[]>('https://localhost:7220/api/students').subscribe(
+    this.http.get<Student[]>('https://localhost:8081/api/students').subscribe(
       (result) => {
         this.students = result;
       },

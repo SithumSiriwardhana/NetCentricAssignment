@@ -22,7 +22,7 @@ namespace StudentManagementSystemAPI.Migrations
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
-                    Addresss = table.Column<string>(type: "longtext", nullable: true)
+                    Address = table.Column<string>(type: "longtext", nullable: true)
                 },
                 constraints: table =>
                 {
