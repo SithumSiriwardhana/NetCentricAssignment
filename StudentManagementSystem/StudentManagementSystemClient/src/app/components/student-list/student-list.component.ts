@@ -1,42 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentService } from '../../service/student.service';
 import { Student } from '../../models/student';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
-  styleUrl: './student-list.component.css'
 })
 export class StudentListComponent implements OnInit {
+  students: Student[] = [];
 
-  public students: Student[] = [];
+  constructor(private studentService: StudentService) { }
 
-  constructor(private http: HttpClient) { }
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.getStudents();
   }
 
-  getStudents() {
-    this.http.get<Student[]>('https://localhost:8081/api/students').subscribe(
-      (result) => {
-        this.students = result;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  getStudents(): void {
+    this.studentService.getStudents().subscribe((data) => {
+      this.students = data;
+    });
   }
 
-  viewStudent(id:number) {
-
-  }
-
-  editStudent(id: number) {
-
-  }
-
-  deleteStudent(id: number) {
-
+  deleteStudent(id: number): void {
+    this.studentService.deleteStudent(id).subscribe(() => {
+      this.getStudents();
+    });
   }
 }

@@ -1,10 +1,31 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-4">
-      <app-student-form></app-student-form>
-    </div>
-    <div class="col-md-8">
-      <app-student-list></app-student-list>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Student Management</a>
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link"
+             routerLink="/"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/add" routerLinkActive="active">Add Student</a>
+        </li>
+      </ul>
     </div>
   </div>
-</div>
+</nav>
+
+<!-- The routed components will be displayed here -->
+<router-outlet></router-outlet>

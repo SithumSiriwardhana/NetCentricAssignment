@@ -1,0 +1,15 @@
+<h2 class="text-center my-4">Student Details</h2>
+
+<div *ngIf="student" class="card w-50 mx-auto shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">Student Information</h5>
+    <p class="card-text"><strong>ID:</strong> {{ student.id }}</p>
+    <p class="card-text"><strong>Name:</strong> {{ student.name }}</p>
+    <p class="card-text"><strong>Age:</strong> {{ student.age }}</p>
+    <p class="card-text"><strong>Address:</strong> {{ student.address }}</p>
+  </div>
+</div>
+
+<div class="text-center mt-4">
+  <button class="btn btn-primary" routerLink="/">Back</button>
+</div>

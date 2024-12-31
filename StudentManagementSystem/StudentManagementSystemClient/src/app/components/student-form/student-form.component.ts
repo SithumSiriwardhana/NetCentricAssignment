@@ -1,45 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StudentService } from '../../service/student.service';
 import { Student } from '../../models/student';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-form',
   templateUrl: './student-form.component.html',
-  styleUrl: './student-form.component.css'
 })
-export class StudentFormComponent {
+export class StudentFormComponent implements OnInit {
+  student: Student = { id: 0, name: '', age: 0, address: '' };
+  isEdit: boolean = false;
 
-  student: Student = {
-    id:0,
-    name: '',
-    age: 0,
-    address: '',
-  };
+  constructor(
+    private studentService: StudentService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
-  constructor(private http: HttpClient) { }
-
-  saveStudent() {
-    const apiUrl = 'https://localhost:8081/api/students'; // Replace with your API endpoint
-    this.http.post(apiUrl, this.student).subscribe(
-      (response) => {
-        console.log('Student saved successfully:', response);
-        alert('Student saved successfully!');
-        this.resetForm();
-      },
-      (error) => {
-        console.error('Error saving student:', error);
-        alert('Failed to save student. Please try again.');
-      }
-    );
+  ngOnInit(): void {
+    const id = +this.route.snapshot.paramMap.get('id')!;
+    if (id) {
+      this.isEdit = true;
+      this.studentService.getStudentById(id).subscribe((data) => {
+        this.student = data;
+      });
+    }
   }
 
-  resetForm() {
-    this.student = {
-      id:0,
-      name: '',
-      age: 0,
-      address: '',
-    };
+  saveStudent(): void {
+    if (this.isEdit) {
+      this.studentService
+        .updateStudent(this.student.id, this.student)
+        .subscribe(() => this.router.navigate(['/']));
+    } else {
+      this.studentService.addStudent(this.student).subscribe(() => {
+        this.router.navigate(['/']);
+      });
+    }
   }
-
 }
